@@ -1,38 +1,10 @@
 ﻿using System.Drawing;
 
-namespace WindowsFormsApp1
+namespace Laboratornaya
 {
-    class AircraftCarrier
+    class AircraftCarrier : WarShip
     {
-
-        //левая координата отрисовки авианосца
-        private float _startPosX;
-
-        //правая координата отрисовки авианосца
-        private float _startPosY;
-
-        //ширина окна отрисовки
-        private int _pictureWidth;
-
-        //высота окна отрисовки
-        private int _pictureHeight;
-
-        // ширина отрисовки авианосца
-        private readonly int aircraftCarrierWidth = 300;
-
-        // высота отрисовки авианосца
-        private readonly int aircraftCarrierHeight = 256;
-
-        // максимальная скорость
-        public int MaxSpeed { private set; get; }
-
-        // вес
-        public float Weight { private set; get; }
-
-        // главный цвет
-        public Color MainColor { private set; get; }
-
-        // дополнительные цыета
+        // дополнительные цвета
         public Color DopColor { private set; get; }
 
         // наличие самолётов
@@ -41,141 +13,54 @@ namespace WindowsFormsApp1
         // наличие взлётной полосы
         public bool HasRunWay { private set; get; }
 
-
         // наличие радара
         public bool HasRadar { private set; get; }
 
-
-
-
-
         // Конструктор
-        public AircraftCarrier(int maxSpeed, float weight, Color mainColor, Color dopColor, bool hasPlane, bool hasRunWay, bool hasRadar)
+        public AircraftCarrier(int maxSpeed, float weight, Color mainColor, Color dopColor, bool hasPlane, bool hasRunWay, bool hasRadar) :
+            base(maxSpeed, weight, mainColor, 150, 100)
         {
-            MaxSpeed = maxSpeed;
-            Weight = weight;
-            MainColor = mainColor;
             DopColor = dopColor;
             HasPlane = hasPlane;
             HasRunWay = hasRunWay;
             HasRadar = hasRadar;
         }
 
-
-        // установка позиции авианосца
-        public void SetPosition(int x, int y, int width, int height)
-        {
-            if ((_startPosX >= 0 && _startPosX + aircraftCarrierWidth < _pictureWidth) &&
-                (_startPosY >= 0 && _startPosY + aircraftCarrierHeight < _pictureHeight))
-            {
-                _startPosX = x;
-                _startPosY = y;
-            }
-            _pictureHeight = height;
-            _pictureWidth = width;
-
-        }
-
-
-        // Изменение направления перемещения
-        public void MoveTransport(Direction direction)
-        {
-            float step = MaxSpeed * 100 / Weight;
-            switch (direction)
-            {
-                // вправо
-                case Direction.Right:
-                    if (_startPosX + step < _pictureWidth - aircraftCarrierWidth)
-                    {
-                        _startPosX += step;
-                    }
-                    break;
-
-                // влево
-                case Direction.Left:
-                    if (_startPosX - step > 0)
-                    {
-                        _startPosX -= step;
-                    }
-                    break;
-
-                // вверх
-                case Direction.Up:
-                    if (_startPosY - step > 0)
-                    {
-                        _startPosY -= step;
-                    }
-                    break;
-
-                // вниз
-                case Direction.Down:
-                    if (_startPosY + step < _pictureHeight - aircraftCarrierHeight)
-                    {
-                        _startPosY += step;
-                    }
-                    break;
-            }
-
-        }
-
-
         // отрисовка авианосца
-        public void DrawAircraftCarrier(Graphics g)
+        public override void DrawWaterTransport(Graphics g)
         {
-            g.FillRectangle(new SolidBrush(Color.Red), _startPosX + 15, _startPosY + 20, 275, 120);
-
-            // отрисовка тела авианосца
-            Point[] points = new Point[10]
-                {
-                   new Point((int)(_startPosX), (int)(_startPosY + 32)),
-                   new Point((int)(_startPosX + 120), (int)(_startPosY )),
-                   new Point((int)(_startPosX + 270), (int)(_startPosY)),
-                   new Point((int)(_startPosX + 270), (int)(_startPosY + 32)),
-                   new Point((int)(_startPosX + 300), (int)(_startPosY + 32)),
-                   new Point((int)(_startPosX + 300), (int)(_startPosY + 128)),
-                   new Point((int)(_startPosX + 270), (int)(_startPosY + 128)),
-                   new Point((int)(_startPosX + 270), (int)(_startPosY + 160)),
-                   new Point((int)(_startPosX + 120), (int)(_startPosY + 160)),
-                   new Point((int)(_startPosX), (int)(_startPosY + 128)),
-                };
-            g.FillPolygon(new SolidBrush(MainColor), points);
+            // отрисовка тела
+            base.DrawWaterTransport(g);
 
             // отрисовка взлётной полосы
             if (HasRunWay)
             {
+                Point[] points = new Point[4]
+                {
+                   new Point((int)(_startPosX), (int)(_startPosY + 22)),
+                   new Point((int)(_startPosX + 150), (int)(_startPosY + 22)),
+                   new Point((int)(_startPosX + 150), (int)(_startPosY + 78)),
+                   new Point((int)(_startPosX  ), (int)(_startPosY + 78)),
 
-                points = new Point[4]
-              {
-                   new Point((int)(_startPosX + 70), (int)(_startPosY + 160)),
-                   new Point((int)(_startPosX + 270), (int)(_startPosY + 32 )),
-                   new Point((int)(_startPosX + 270), (int)(_startPosY + 128)),
-                   new Point((int)(_startPosX + 70 ), (int)(_startPosY + 256)),
-
-              };
+                };
                 g.FillPolygon(new SolidBrush(DopColor), points);
+                g.DrawLine(new Pen(Color.White), _startPosX, _startPosY + 47, _startPosX + 150, _startPosY + 47);
             }
 
             // отрисовка радара
             if (HasRadar)
             {
-                g.FillRectangle(new SolidBrush(Color.Black), _startPosX + 120, _startPosY + 10, 60, 30);
-                g.FillEllipse(new SolidBrush(Color.LightGray), _startPosX + 130, _startPosY + 7, 20, 20);
+                g.FillRectangle(new SolidBrush(Color.Black), _startPosX + 95, _startPosY + 5, 20, 10);
+                g.FillEllipse(new SolidBrush(Color.LightGray), _startPosX + 97, _startPosY + 8, 5, 5);
             }
-
 
             // отрисовка самолёта
             if (HasPlane)
             {
-                g.DrawLine(new Pen(Color.Black), _startPosX + 20, _startPosY + 80, _startPosX + 20, _startPosY + 112);
-                g.DrawLine(new Pen(Color.Black), _startPosX + 20, _startPosY + 96, _startPosX + 60, _startPosY + 96);
-                g.FillRectangle(new SolidBrush(Color.LightSlateGray), _startPosX + 35, _startPosY + 60, 15, 72);
-
-
+                g.DrawLine(new Pen(Color.Black), _startPosX + 104, _startPosY + 27, _startPosX + 104, _startPosY + 43);
+                g.DrawLine(new Pen(Color.Black), _startPosX + 104, _startPosY + 35, _startPosX + 120, _startPosY + 35);
+                g.FillRectangle(new SolidBrush(Color.LightSlateGray), _startPosX + 111, _startPosY + 26, 5, 20);
             }
-
         }
-
     }
-
-
 }
