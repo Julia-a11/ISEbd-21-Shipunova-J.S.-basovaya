@@ -39,7 +39,6 @@ namespace Laboratornaya
             {
                 _startPosX = x;
                 _startPosY = y;
-
             }
             _pictureHeight = height;
             _pictureWidth = width;

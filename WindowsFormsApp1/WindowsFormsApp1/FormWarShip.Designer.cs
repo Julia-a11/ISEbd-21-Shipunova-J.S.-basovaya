@@ -1,6 +1,6 @@
 ﻿namespace Laboratornaya
 {
-    partial class FormWaterTransport
+    partial class FormWarShip
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -118,7 +118,7 @@
             this.buttonCreateWarShip.UseVisualStyleBackColor = false;
             this.buttonCreateWarShip.Click += new System.EventHandler(this.buttonCreateWarShip_Click);
             // 
-            // FormWaterTransport
+            // FormWarShip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -130,9 +130,9 @@
             this.Controls.Add(this.buttonUp);
             this.Controls.Add(this.buttonCreateAirctaft);
             this.Controls.Add(this.pictureBoxShip);
-            this.Name = "FormWaterTransport";
+            this.Name = "FormWarShip";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Водный транспорт";
+            this.Text = "Военный корабль";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShip)).EndInit();
             this.ResumeLayout(false);
 

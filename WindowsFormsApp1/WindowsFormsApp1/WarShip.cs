@@ -71,7 +71,7 @@ namespace Laboratornaya
 
             // отрисовка тела корабля
             Point[] points = new Point[10]
-                {
+            {
                    new Point((int)(_startPosX), (int)(_startPosY + 22)),
                    new Point((int)(_startPosX + 40), (int)(_startPosY )),
                    new Point((int)(_startPosX + 120), (int)(_startPosY)),
@@ -82,12 +82,12 @@ namespace Laboratornaya
                    new Point((int)(_startPosX + 120), (int)(_startPosY + 100)),
                    new Point((int)(_startPosX + 40), (int)(_startPosY + 100)),
                    new Point((int)(_startPosX), (int)(_startPosY + 78)),
-                };
+            };
             g.FillPolygon(new SolidBrush(MainColor), points);
 
             //отрисовка запасной лодки
             Point[] points1 = new Point[12]
-               {
+            {
                    new Point((int)(_startPosX + 30), (int)(_startPosY + 22)),
                    new Point((int)(_startPosX + 65), (int)(_startPosY  + 22)),
                    new Point((int)(_startPosX + 65), (int)(_startPosY + 17)),
@@ -100,7 +100,7 @@ namespace Laboratornaya
                    new Point((int)(_startPosX + 65), (int)(_startPosY + 83)),
                    new Point((int)(_startPosX + 65), (int)(_startPosY + 78)),
                    new Point((int)(_startPosX + 30), (int)(_startPosY + 78)),
-               };
+            };
             g.FillPolygon(new SolidBrush(Color.Gray), points1);
             g.FillEllipse(new SolidBrush(Color.Brown), _startPosX + 35, _startPosY + 40, 70, 20);
 

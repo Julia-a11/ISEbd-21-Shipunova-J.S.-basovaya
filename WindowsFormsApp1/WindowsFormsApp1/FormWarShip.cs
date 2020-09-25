@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace Laboratornaya
 {
-    public partial class FormWaterTransport : Form
+    public partial class FormWarShip : Form
     {
-        private IWaterTransport ship;
-        public FormWaterTransport()
+        private IWaterTransport warShip;
+        public FormWarShip()
         {
             InitializeComponent();
         }
@@ -23,7 +23,7 @@ namespace Laboratornaya
         {
             Bitmap bmp = new Bitmap(pictureBoxShip.Width, pictureBoxShip.Height);
             Graphics gr = Graphics.FromImage(bmp);
-            ship.DrawWaterTransport(gr);
+            warShip.DrawWaterTransport(gr);
             pictureBoxShip.Image = bmp;
         }
 
@@ -31,16 +31,16 @@ namespace Laboratornaya
         private void buttonCreateAirctaft_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            ship = new AircraftCarrier(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.DarkGray, Color.DimGray,true,true,true);
-            ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxShip.Width, pictureBoxShip.Height);
+            warShip = new AircraftCarrier(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.DarkGray, Color.DimGray,true,true,true);
+            warShip.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxShip.Width, pictureBoxShip.Height);
             Draw();
         }
 
         private void buttonCreateWarShip_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            ship = new WarShip(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.DarkGray);
-             ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxShip.Width, pictureBoxShip.Height);
+            warShip = new WarShip(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.DarkGray);
+            warShip.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxShip.Width, pictureBoxShip.Height);
             Draw();
         }
 
@@ -52,16 +52,16 @@ namespace Laboratornaya
             switch(name)
             {
                 case "buttonUp":
-                    ship.MoveTransport(Direction.Up);
+                    warShip.MoveTransport(Direction.Up);
                     break;
                 case "buttonDown":
-                    ship.MoveTransport(Direction.Down);
+                    warShip.MoveTransport(Direction.Down);
                     break;
                 case "buttonLeft":
-                    ship.MoveTransport(Direction.Left);
+                    warShip.MoveTransport(Direction.Left);
                     break;
                 case "buttonRight":
-                    ship.MoveTransport(Direction.Right);
+                    warShip.MoveTransport(Direction.Right);
                     break;
             }
             Draw();
