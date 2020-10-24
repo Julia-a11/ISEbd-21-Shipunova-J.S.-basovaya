@@ -37,10 +37,10 @@ namespace Laboratornaya
             {
                 Point[] points = new Point[4]
                 {
-                   new Point((int)(_startPosX), (int)(_startPosY + 22)),
+                   new Point((int)(_startPosX ), (int)(_startPosY + 22)),
                    new Point((int)(_startPosX + 150), (int)(_startPosY + 22)),
                    new Point((int)(_startPosX + 150), (int)(_startPosY + 78)),
-                   new Point((int)(_startPosX  ), (int)(_startPosY + 78)),
+                   new Point((int)(_startPosX ), (int)(_startPosY + 78)),
 
                 };
                 g.FillPolygon(new SolidBrush(DopColor), points);

@@ -47,11 +47,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Direction.cs" />
-    <Compile Include="FormWarShip.cs">
+    <Compile Include="Docks.cs" />
+    <Compile Include="FormDocks.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormWarShip.Designer.cs">
-      <DependentUpon>FormWarShip.cs</DependentUpon>
+    <Compile Include="FormDocks.Designer.cs">
+      <DependentUpon>FormDocks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormWaterTransport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWaterTransport.Designer.cs">
+      <DependentUpon>FormWaterTransport.cs</DependentUpon>
     </Compile>
     <Compile Include="IWaterTransport.cs" />
     <Compile Include="Program.cs" />
@@ -59,8 +66,11 @@
     <Compile Include="AircraftCarrier.cs" />
     <Compile Include="WarShip.cs" />
     <Compile Include="Ship.cs" />
-    <EmbeddedResource Include="FormWarShip.resx">
-      <DependentUpon>FormWarShip.cs</DependentUpon>
+    <EmbeddedResource Include="FormDocks.resx">
+      <DependentUpon>FormDocks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWaterTransport.resx">
+      <DependentUpon>FormWaterTransport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
