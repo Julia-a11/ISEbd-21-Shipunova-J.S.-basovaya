@@ -1,6 +1,6 @@
 ﻿namespace Laboratornaya
 {
-    partial class FormWaterTransport
+    partial class FormWarShip
     {
         /// <summary>
         /// Required designer variable.
@@ -92,7 +92,7 @@
             this.buttonRight.UseVisualStyleBackColor = true;
             this.buttonRight.Click += new System.EventHandler(this.buttonMove_Click);
             // 
-            // FormWaterTransport
+            // FormWarShip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -102,8 +102,8 @@
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonUp);
             this.Controls.Add(this.pictureBoxWaterTransport);
-            this.Name = "FormWaterTransport";
-            this.Text = "FormWaterTransport";
+            this.Name = "FormWarShip";
+            this.Text = "FormWarShip";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWaterTransport)).EndInit();
             this.ResumeLayout(false);
 

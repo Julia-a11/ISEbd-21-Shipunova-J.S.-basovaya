@@ -73,7 +73,7 @@ namespace Laboratornaya
                 var ship = docks - Convert.ToInt32(maskedTextBoxNumber.Text);
                 if (ship != null)
                 {
-                    FormWaterTransport form = new FormWaterTransport();
+                    FormWarShip form = new FormWarShip();
                     form.SetShip(ship);
 
                     form.ShowDialog();
