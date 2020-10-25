@@ -47,6 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Direction.cs" />
+    <Compile Include="Docks.cs" />
+    <Compile Include="FormDocks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDocks.Designer.cs">
+      <DependentUpon>FormDocks.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormWarShip.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +66,9 @@
     <Compile Include="AircraftCarrier.cs" />
     <Compile Include="WarShip.cs" />
     <Compile Include="Ship.cs" />
+    <EmbeddedResource Include="FormDocks.resx">
+      <DependentUpon>FormDocks.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormWarShip.resx">
       <DependentUpon>FormWarShip.cs</DependentUpon>
     </EmbeddedResource>
