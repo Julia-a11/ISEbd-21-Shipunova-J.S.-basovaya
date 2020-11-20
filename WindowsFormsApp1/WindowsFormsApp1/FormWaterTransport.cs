@@ -4,10 +4,10 @@ using System.Windows.Forms;
 
 namespace Laboratornaya
 {
-    public partial class FormWarShip : Form
+    public partial class FormWaterTransport : Form
     {
-        private IWaterTransport warShip;
-        public FormWarShip()
+        private IWaterTransport ship;
+        public FormWaterTransport()
         {
             InitializeComponent();
         }
@@ -15,7 +15,7 @@ namespace Laboratornaya
         // Передача корабля на форму
         public void SetShip(IWaterTransport ship)
         {
-            this.warShip = ship;
+            this.ship = ship;
             Draw();
         }
 
@@ -24,7 +24,7 @@ namespace Laboratornaya
         {
             Bitmap bmp = new Bitmap(pictureBoxWaterTransport.Width, pictureBoxWaterTransport.Height);
             Graphics gr = Graphics.FromImage(bmp);
-            warShip?.DrawWaterTransport(gr);
+            ship?.DrawWaterTransport(gr);
             pictureBoxWaterTransport.Image = bmp;
         }
 
@@ -32,16 +32,16 @@ namespace Laboratornaya
         private void buttonCreateAirctaft_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            warShip = new AircraftCarrier(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.DarkGray, Color.DimGray, true, true, true);
-            warShip.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxWaterTransport.Width, pictureBoxWaterTransport.Height);
+            ship = new AircraftCarrier(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.DarkGray, Color.DimGray, true, true, true);
+            ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxWaterTransport.Width, pictureBoxWaterTransport.Height);
             Draw();
         }
 
         private void buttonCreateWarShip_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            warShip = new WarShip(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.DarkGray);
-            warShip.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxWaterTransport.Width, pictureBoxWaterTransport.Height);
+            ship = new WarShip(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.DarkGray);
+            ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxWaterTransport.Width, pictureBoxWaterTransport.Height);
             Draw();
         }
 
@@ -53,19 +53,19 @@ namespace Laboratornaya
             switch (name)
             {
                 case "buttonUp":
-                    warShip?.MoveTransport(Direction.Up);
+                    ship?.MoveTransport(Direction.Up);
                     break;
                 case "buttonDown":
-                    warShip?.MoveTransport(Direction.Down);
+                    ship?.MoveTransport(Direction.Down);
                     break;
                 case "buttonLeft":
-                    warShip?.MoveTransport(Direction.Left);
+                    ship?.MoveTransport(Direction.Left);
                     break;
                 case "buttonRight":
-                    warShip?.MoveTransport(Direction.Right);
+                    ship?.MoveTransport(Direction.Right);
                     break;
             }
             Draw();
-        }
+        }      
     }
 }

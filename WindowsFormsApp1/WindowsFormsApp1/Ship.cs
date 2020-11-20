@@ -3,7 +3,7 @@
 namespace Laboratornaya
 {
     //абстрактный класс
-    public abstract class Ship : IWaterTransport
+    public abstract class Ship: IWaterTransport
     {
         //левая координата отрисовки корабля
         protected float _startPosX;
@@ -32,15 +32,16 @@ namespace Laboratornaya
             _pictureHeight = height;
             _pictureWidth = width;
 
-            if (_startPosX >= 0 && _startPosX < _pictureWidth && _startPosY >= 0 && _startPosY < _pictureHeight)
+            if ((_startPosX >= 0 && _startPosX   < _pictureWidth) &&
+                (_startPosY >= 0 && _startPosY   < _pictureHeight))
             {
                 _startPosX = x;
                 _startPosY = y;
-            }
+            }            
         }
 
         public abstract void DrawWaterTransport(Graphics g);
 
-        public abstract void MoveTransport(Direction direction);
+        public abstract void MoveTransport(Direction direction); 
     }
 }
