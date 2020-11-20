@@ -41,7 +41,6 @@ namespace Laboratornaya
                    new Point((int)(_startPosX + 150), (int)(_startPosY + 22)),
                    new Point((int)(_startPosX + 150), (int)(_startPosY + 78)),
                    new Point((int)(_startPosX ), (int)(_startPosY + 78)),
-
                 };
                 g.FillPolygon(new SolidBrush(DopColor), points);
                 g.DrawLine(new Pen(Color.White), _startPosX, _startPosY + 47, _startPosX + 150, _startPosY + 47);

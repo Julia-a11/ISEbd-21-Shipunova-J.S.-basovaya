@@ -1,13 +1,17 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace Laboratornaya
 {
     // Параметризованный класс для хранения набора объектов от интерфейса IWaterTrnsport
     public class Docks<T> where T : class, IWaterTransport
     {
-        //Массив хранимых объектов
-        private readonly T[] _places;
+        //Список объектов, которые храним
+        private readonly List<T> _places;
 
+        //Максимальное количество мест в доках
+        private readonly int _maxDocksPlaces;
+        
         // Ширина окна отрисовки
         private readonly int pictureWidth;
 
@@ -24,46 +28,44 @@ namespace Laboratornaya
         {
             int width = picWidth / _placeSizeWidth;
             int height = picHeight / _placeSizeHeight;
-            _places = new T[width * height];
+            _maxDocksPlaces = width * height;
             pictureWidth = picWidth;
             pictureHeight = picHeight;
+            _places = new List<T>();
         }
 
         //Перегрузка оператора сложения
         public static bool operator +(Docks<T> d, T ship)
         {
-            for (int i = 0; i < d._places.Length; i++)
+            if (d._places.Count >= d._maxDocksPlaces)
             {
-                if (d._places[i] == null)
-                {
-                    d._places[i] = ship;
-                    d._places[i].SetPosition( d._placeSizeWidth * (i / (d.pictureHeight / d._placeSizeHeight)), 
-                        15 + d._placeSizeHeight * (i % (d.pictureHeight / d._placeSizeHeight)), d.pictureWidth, d.pictureHeight);
-                    return true;
-                }
+                return false;
             }
-            return false;
+            d._places.Add(ship);
+            return true;
         }
 
         // Перегрузка оператора вычитания
         public static T operator -(Docks<T> d, int index)
         {
-            if (index >= 0 && index < d._places.Length)
+            if (index < -1 || index > d._places.Count)
             {
-                T ship = d._places[index];
-                d._places[index] = null;
-                return ship;
+                return null;
             }
-            return null;
+            T ship = d._places[index];
+            d._places.RemoveAt(index);
+            return ship;
         }
 
         // Метод отрисовки дока
         public void Draw(Graphics g)
         {
             DrawMarking(g);
-            for (int i = 0; i < _places.Length; i++)
+            for (int i = 0; i < _places.Count; ++i)
             {
-                _places[i]?.DrawWaterTransport(g);
+                _places[i].SetPosition(_placeSizeWidth * ( i / (pictureHeight / _placeSizeHeight)),
+                       20 + _placeSizeHeight * (i % (pictureHeight / _placeSizeHeight)), pictureWidth, pictureHeight);
+                _places[i].DrawWaterTransport(g);
             }
         }
 
