@@ -94,9 +94,11 @@
             // maskedTextBoxNumber
             // 
             this.maskedTextBoxNumber.Location = new System.Drawing.Point(60, 52);
+            this.maskedTextBoxNumber.Mask = "00";
             this.maskedTextBoxNumber.Name = "maskedTextBoxNumber";
             this.maskedTextBoxNumber.Size = new System.Drawing.Size(49, 20);
             this.maskedTextBoxNumber.TabIndex = 6;
+            this.maskedTextBoxNumber.ValidatingType = typeof(int);
             // 
             // labelTakeShip
             // 
