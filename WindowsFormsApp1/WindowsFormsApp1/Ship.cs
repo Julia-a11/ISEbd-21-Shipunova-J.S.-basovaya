@@ -40,6 +40,11 @@ namespace Laboratornaya
             }            
         }
 
+        public void SetMainColor (Color color)
+        {
+            MainColor = color;
+        }
+
         public abstract void DrawWaterTransport(Graphics g);
 
         public abstract void MoveTransport(Direction direction); 

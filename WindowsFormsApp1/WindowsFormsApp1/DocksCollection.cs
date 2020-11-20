@@ -17,7 +17,7 @@ namespace Laboratornaya
         // Высота окна отрисоки
         private readonly int pictureHeight;
 
-        // Кнструктор
+        // Конструктор
         public DocksCollection(int pictureWidth, int pictureHeight)
         {
             docksStages = new Dictionary<string, Docks<Ship>>();
