@@ -50,52 +50,6 @@ namespace Laboratornaya
             pictureBoxDocks.Image = bmp;
         }
 
-        //обработка нажатия кнопки "Припарковать военный корабль"
-        private void buttonParkingWarShip_Click(object sender, EventArgs e)
-        {
-            if (listBoxDocks.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var ship = new WarShip(100, 1000, dialog.Color);
-                    if (docksCollection[listBoxDocks.SelectedItem.ToString()] + ship)
-                    {
-                        Draw();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Доки переполнены");
-                    }
-                }
-            }
-        }
-
-        //обработка нажатия кнопки "Припарковать авианосец"
-        private void buttonParkingAircraftCarrier_Click(object sender, EventArgs e)
-        {
-            if (listBoxDocks.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var ship = new AircraftCarrier(100, 1000, dialog.Color, dialogDop.Color, true, true, true);
-                        if (docksCollection[listBoxDocks.SelectedItem.ToString()] + ship)
-                        {
-                            Draw();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Доки переполнены");
-                        }
-                    }
-                }
-            }
-        }
-
         //обработка кнопки "Забрать"
         private void buttonTakeShip_Click(object sender, EventArgs e)
         {
@@ -142,5 +96,28 @@ namespace Laboratornaya
         {
             Draw();
         }    
+
+        // Метод добавления корабля
+        private void AddShip(Ship ship)
+        {
+            if (ship != null && listBoxDocks.SelectedIndex > -1)
+            {
+                if ((docksCollection[listBoxDocks.SelectedItem.ToString()] + ship))
+                {
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Корабль не удалось поставить");
+                }
+            }
+        }
+
+        private void buttonAddWarShip_Click(object sender, EventArgs e)
+        {
+            FormWaterTransportConfig formWaterTransportConfig = new FormWaterTransportConfig();
+            formWaterTransportConfig.AddEvent(AddShip);
+            formWaterTransportConfig.ShowDialog();
+        }
     }
 }

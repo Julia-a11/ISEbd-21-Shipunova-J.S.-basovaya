@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.pictureBoxDocks = new System.Windows.Forms.PictureBox();
-            this.buttonParkingWarShip = new System.Windows.Forms.Button();
-            this.buttonParkingAircraftCarrier = new System.Windows.Forms.Button();
+            this.buttonAddWarShip = new System.Windows.Forms.Button();
             this.buttonTakeShip = new System.Windows.Forms.Button();
             this.labelPlace = new System.Windows.Forms.Label();
             this.maskedTextBoxNumber = new System.Windows.Forms.MaskedTextBox();
@@ -53,25 +52,15 @@
             this.pictureBoxDocks.TabIndex = 0;
             this.pictureBoxDocks.TabStop = false;
             // 
-            // buttonParkingWarShip
+            // buttonAddWarShip
             // 
-            this.buttonParkingWarShip.Location = new System.Drawing.Point(762, 238);
-            this.buttonParkingWarShip.Name = "buttonParkingWarShip";
-            this.buttonParkingWarShip.Size = new System.Drawing.Size(113, 51);
-            this.buttonParkingWarShip.TabIndex = 1;
-            this.buttonParkingWarShip.Text = "Припарковать военный корабль";
-            this.buttonParkingWarShip.UseVisualStyleBackColor = true;
-            this.buttonParkingWarShip.Click += new System.EventHandler(this.buttonParkingWarShip_Click);
-            // 
-            // buttonParkingAircraftCarrier
-            // 
-            this.buttonParkingAircraftCarrier.Location = new System.Drawing.Point(762, 295);
-            this.buttonParkingAircraftCarrier.Name = "buttonParkingAircraftCarrier";
-            this.buttonParkingAircraftCarrier.Size = new System.Drawing.Size(113, 51);
-            this.buttonParkingAircraftCarrier.TabIndex = 2;
-            this.buttonParkingAircraftCarrier.Text = "Припарковать авианосец";
-            this.buttonParkingAircraftCarrier.UseVisualStyleBackColor = true;
-            this.buttonParkingAircraftCarrier.Click += new System.EventHandler(this.buttonParkingAircraftCarrier_Click);
+            this.buttonAddWarShip.Location = new System.Drawing.Point(762, 238);
+            this.buttonAddWarShip.Name = "buttonAddWarShip";
+            this.buttonAddWarShip.Size = new System.Drawing.Size(113, 51);
+            this.buttonAddWarShip.TabIndex = 1;
+            this.buttonAddWarShip.Text = "Добавить военное судно";
+            this.buttonAddWarShip.UseVisualStyleBackColor = true;
+            this.buttonAddWarShip.Click += new System.EventHandler(this.buttonAddWarShip_Click);
             // 
             // buttonTakeShip
             // 
@@ -115,7 +104,7 @@
             this.groupBoxTakeShip.Controls.Add(this.maskedTextBoxNumber);
             this.groupBoxTakeShip.Controls.Add(this.labelPlace);
             this.groupBoxTakeShip.Controls.Add(this.buttonTakeShip);
-            this.groupBoxTakeShip.Location = new System.Drawing.Point(762, 352);
+            this.groupBoxTakeShip.Location = new System.Drawing.Point(762, 311);
             this.groupBoxTakeShip.Name = "groupBoxTakeShip";
             this.groupBoxTakeShip.Size = new System.Drawing.Size(115, 124);
             this.groupBoxTakeShip.TabIndex = 8;
@@ -178,8 +167,7 @@
             this.Controls.Add(this.textBoxDocks);
             this.Controls.Add(this.labelDocks);
             this.Controls.Add(this.groupBoxTakeShip);
-            this.Controls.Add(this.buttonParkingAircraftCarrier);
-            this.Controls.Add(this.buttonParkingWarShip);
+            this.Controls.Add(this.buttonAddWarShip);
             this.Controls.Add(this.pictureBoxDocks);
             this.Name = "FormDocks";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -195,8 +183,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxDocks;
-        private System.Windows.Forms.Button buttonParkingWarShip;
-        private System.Windows.Forms.Button buttonParkingAircraftCarrier;
+        private System.Windows.Forms.Button buttonAddWarShip;
         private System.Windows.Forms.Label labelPlace;
         private System.Windows.Forms.MaskedTextBox maskedTextBoxNumber;
         private System.Windows.Forms.Label labelTakeShip;

@@ -43,7 +43,7 @@ namespace Laboratornaya
                    new Point((int)(_startPosX ), (int)(_startPosY + 78)),
                 };
                 g.FillPolygon(new SolidBrush(DopColor), points);
-                g.DrawLine(new Pen(Color.White), _startPosX, _startPosY + 47, _startPosX + 150, _startPosY + 47);
+                g.DrawLine(new Pen(Color.White), _startPosX , _startPosY + 47, _startPosX + 150, _startPosY + 47);
             }
 
             // отрисовка радара
@@ -60,6 +60,12 @@ namespace Laboratornaya
                 g.DrawLine(new Pen(Color.Black), _startPosX + 104, _startPosY + 35, _startPosX + 120, _startPosY + 35);
                 g.FillRectangle(new SolidBrush(Color.LightSlateGray), _startPosX + 111, _startPosY + 26, 5, 20);
             }
+        }
+
+        // Смена дополнительного цвета
+        public void SetDopColor (Color color)
+        {
+            DopColor = color;
         }
     }
 }

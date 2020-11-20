@@ -61,6 +61,12 @@
     <Compile Include="FormWaterTransport.Designer.cs">
       <DependentUpon>FormWaterTransport.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormWaterTransportConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWaterTransportConfig.Designer.cs">
+      <DependentUpon>FormWaterTransportConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="IWaterTransport.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +78,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormWaterTransport.resx">
       <DependentUpon>FormWaterTransport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWaterTransportConfig.resx">
+      <DependentUpon>FormWaterTransportConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
