@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -117,7 +116,6 @@ namespace Laboratornaya
                 else
                 {
                     throw new FileLoadException();
-
                 }
                 string key = string.Empty;
                 WarShip warShip = null;
@@ -129,8 +127,7 @@ namespace Laboratornaya
                         docksStages.Add(key, new Docks<Ship>(pictureWidth, pictureHeight));
                     }
                     else if (line.Contains(separator))
-                    {
-                       
+                    {                      
                         if (line.Contains("WarShip"))
                         {
                             warShip = new WarShip(line.Split(separator)[1]);

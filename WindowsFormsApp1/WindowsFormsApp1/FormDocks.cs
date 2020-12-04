@@ -1,9 +1,9 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
-using Laboratornya;
-using NLog;
-using WindowsFormsApp1;
+
 
 namespace Laboratornaya
 {
@@ -41,7 +41,6 @@ namespace Laboratornaya
             }
         }
 
-
         //метод отрисовки дока
         private void Draw()
         {
@@ -57,8 +56,6 @@ namespace Laboratornaya
             }
             pictureBoxDocks.Image = bmp;
         }
-
-
 
         //обработка кнопки "Забрать"
         private void buttonTakeShip_Click(object sender, EventArgs e)
@@ -165,7 +162,6 @@ namespace Laboratornaya
             if (listBoxDocks.SelectedItem == null)
             {
                 MessageBox.Show("Выберите док", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                logger.Warn("Ошибка! Док не выбран!");
                 return;
             }
             FormWaterTransportConfig formWaterTransportConfig = new FormWaterTransportConfig();
@@ -196,14 +192,14 @@ namespace Laboratornaya
 
         private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    docksCollection.LoadData(openFileDialog1.FileName);
+                    docksCollection.LoadData(openFileDialog.FileName);
                     MessageBox.Show("Загрузили", "Результат",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    logger.Info("Загружено из файла " + openFileDialog1.FileName);
+                    logger.Info("Загружено из файла " + openFileDialog.FileName);
                     ReloadLevels();
                     Draw();
                 }
@@ -213,6 +209,16 @@ namespace Laboratornaya
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     logger.Warn(ex.Message);
                 }
+                catch (FileNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Файл не найден", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
+                }
+                catch (FileLoadException ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка при загрузке", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
+                }           
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);

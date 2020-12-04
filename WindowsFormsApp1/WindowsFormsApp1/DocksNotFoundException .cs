@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Laboratornya
+namespace Laboratornaya
 {
     // класс ошибка "Если не найден корабль по определённому месту"
     public class DocksNotFoundException : Exception
