@@ -6,14 +6,13 @@ namespace Laboratornaya
 {
     public partial class FormDocks : Form
     {
-        //объект от класса - коллекции доков
+        // объект от класса - коллекции доков
         private readonly DocksCollection docksCollection;
 
         public FormDocks()
         {
             InitializeComponent();
             docksCollection = new DocksCollection(pictureBoxDocks.Width, pictureBoxDocks.Height);
-            // Draw();
         }
 
         // Заполнение listBox
@@ -35,8 +34,7 @@ namespace Laboratornaya
             }
         }
 
-
-        //метод отрисовки дока
+        // метод отрисовки дока
         private void Draw()
         {
             Bitmap bmp = new Bitmap(pictureBoxDocks.Width, pictureBoxDocks.Height);
@@ -52,9 +50,7 @@ namespace Laboratornaya
             pictureBoxDocks.Image = bmp;
         }
 
-        
-
-        //обработка кнопки "Забрать"
+        // обработка кнопки "Забрать"
         private void buttonTakeShip_Click(object sender, EventArgs e)
         {
             if (maskedTextBoxNumber.Text != "" && listBoxDocks.SelectedIndex > -1)
@@ -144,9 +140,9 @@ namespace Laboratornaya
 
         private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (docksCollection.LoadData(openFileDialog1.FileName))
+                if (docksCollection.LoadData(openFileDialog.FileName))
                 {
                     MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -162,8 +158,3 @@ namespace Laboratornaya
         }
     }
 }
-
-
-
-
-

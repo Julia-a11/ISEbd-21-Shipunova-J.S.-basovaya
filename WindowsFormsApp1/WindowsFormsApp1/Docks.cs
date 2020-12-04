@@ -24,8 +24,6 @@ namespace Laboratornaya
         // Размер парковочного места (высота)
         private readonly int _placeSizeHeight = 130;
 
-
-
         public Docks(int picWidth, int picHeight)
         {
             int width = picWidth / _placeSizeWidth;

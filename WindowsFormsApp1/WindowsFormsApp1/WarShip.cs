@@ -15,7 +15,7 @@ namespace Laboratornaya
         // разделитель для записи информации по объекту в файл
         protected readonly char separator = ';';
 
-        //конструктор
+        // конструктор
         public WarShip(int maxSpeed, float weight, Color mainColor)
         {
             MaxSpeed = maxSpeed;
@@ -35,7 +35,7 @@ namespace Laboratornaya
             }
         }
 
-        //конструктор с изменением размеров корабля
+        // конструктор с изменением размеров корабля
         protected WarShip(int maxSpeed, float weight, Color mainColor, int shipWidth, int shipHeight)
         {
             MaxSpeed = maxSpeed;
@@ -132,4 +132,3 @@ namespace Laboratornaya
         }
     }
 }
-
