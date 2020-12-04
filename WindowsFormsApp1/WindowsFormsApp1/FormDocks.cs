@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Laboratornaya
@@ -9,10 +11,14 @@ namespace Laboratornaya
         // объект от класса - коллекции доков
         private readonly DocksCollection docksCollection;
 
+        // Логгер
+        private readonly Logger logger;
+
         public FormDocks()
         {
             InitializeComponent();
             docksCollection = new DocksCollection(pictureBoxDocks.Width, pictureBoxDocks.Height);
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         // Заполнение listBox
@@ -55,15 +61,32 @@ namespace Laboratornaya
         {
             if (maskedTextBoxNumber.Text != "" && listBoxDocks.SelectedIndex > -1)
             {
-                var ship = docksCollection[listBoxDocks.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBoxNumber.Text);
-                if (ship != null)
+                try
                 {
-                    FormWaterTransport form = new FormWaterTransport();
-                    form.SetShip(ship);
+                    var ship = docksCollection[listBoxDocks.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBoxNumber.Text);
+                    if (ship != null)
+                    {
+                        FormWaterTransport form = new FormWaterTransport();
+                        form.SetShip(ship);
+                        form.ShowDialog();
 
-                    form.ShowDialog();
+                        logger.Info($"Изъят корабль {ship} с места {maskedTextBoxNumber.Text}");
+
+                        Draw();
+                    }
                 }
-                Draw();
+                catch (DocksNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
+                }
             }
         }
 
@@ -74,6 +97,7 @@ namespace Laboratornaya
                 MessageBox.Show("Введите название дока", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            logger.Info("Добавили док " + textBoxDocks.Text);
             docksCollection.DocksAdd(textBoxDocks.Text);
             ReloadLevels();
         }
@@ -85,6 +109,7 @@ namespace Laboratornaya
                 if (MessageBox.Show($"Удалить док {listBoxDocks.SelectedItem.ToString()}?",
                    "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    logger.Info($"Удалили док {listBoxDocks.SelectedItem.ToString()}");
                     docksCollection.DocksDel(listBoxDocks.SelectedItem.ToString());
                     ReloadLevels();
                     Draw();
@@ -94,27 +119,50 @@ namespace Laboratornaya
 
         private void listBoxDocks_SelectedIndexChanged(object sender, EventArgs e)
         {
+            logger.Info($"Перешли на новую парковку {listBoxDocks.SelectedItem.ToString()}");
             Draw();
-        }    
+        }
 
         // Метод добавления корабля
         private void AddShip(Ship ship)
         {
             if (ship != null && listBoxDocks.SelectedIndex > -1)
             {
-                if ((docksCollection[listBoxDocks.SelectedItem.ToString()] + ship))
+                try
                 {
+                    if ((docksCollection[listBoxDocks.SelectedItem.ToString()])+ship)
+                    {
+                        Draw();
+                        logger.Info($"Добавлен корабль {ship}");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Корабль не удалось поставить");
+                    }
                     Draw();
                 }
-                else
+                catch(DocksOverflowException ex)
                 {
-                    MessageBox.Show("Корабль не удалось поставить");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
                 }
             }
         }
 
         private void buttonAddWarShip_Click(object sender, EventArgs e)
         {
+            if (listBoxDocks.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите док", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             FormWaterTransportConfig formWaterTransportConfig = new FormWaterTransportConfig();
             formWaterTransportConfig.AddEvent(AddShip);
             formWaterTransportConfig.ShowDialog();
@@ -125,15 +173,18 @@ namespace Laboratornaya
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (docksCollection.SaveData(saveFileDialog.FileName))
+                try
                 {
-                    MessageBox.Show("Сохранение прoшло успешно", "Результат",
+                    docksCollection.SaveData(saveFileDialog.FileName);
+                    MessageBox.Show("Сохранение прошло успешно", "Результат",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialog.FileName);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат",
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
                 }
             }
         }
@@ -142,17 +193,35 @@ namespace Laboratornaya
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (docksCollection.LoadData(openFileDialog.FileName))
+                try
                 {
-                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    docksCollection.LoadData(openFileDialog.FileName);
+                    MessageBox.Show("Загрузили", "Результат",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Загружено из файла " + openFileDialog.FileName);
                     ReloadLevels();
                     Draw();
                 }
-                else
+                catch (DocksOverflowException ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат",
+                    MessageBox.Show(ex.Message, "Переполнение",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
+                }
+                catch (FileNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Файл не найден", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
+                }
+                catch (FileLoadException ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка при загрузке", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
+                }           
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
                 }
             }
         }

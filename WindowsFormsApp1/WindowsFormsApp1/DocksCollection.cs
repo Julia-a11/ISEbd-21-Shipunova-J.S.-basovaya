@@ -63,7 +63,7 @@ namespace Laboratornaya
         }
 
         // сохранение информации по кораблям в доках в файл
-        public bool SaveData(string filename)
+        public void SaveData(string filename)
         {
             if (File.Exists(filename))
             {
@@ -97,15 +97,14 @@ namespace Laboratornaya
                     }
                 }
             }
-            return true;
         }
 
         // загрузка информации по кораблям в доках из файла
-        public bool LoadData(string filename)
+        public void LoadData(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
             using (StreamReader sr = new StreamReader(filename, Encoding.Default))
             {
@@ -116,7 +115,7 @@ namespace Laboratornaya
                 }
                 else
                 {
-                    return false;
+                    throw new FileLoadException();
                 }
                 string key = string.Empty;
                 WarShip warShip = null;
@@ -128,8 +127,7 @@ namespace Laboratornaya
                         docksStages.Add(key, new Docks<Ship>(pictureWidth, pictureHeight));
                     }
                     else if (line.Contains(separator))
-                    {
-                       
+                    {                      
                         if (line.Contains("WarShip"))
                         {
                             warShip = new WarShip(line.Split(separator)[1]);
@@ -140,12 +138,11 @@ namespace Laboratornaya
                         }
                         if (!(docksStages[key] + warShip))
                         {
-                            return false;
+                            throw new DocksOverflowException();
                         }
                     }
                 }
             }          
-            return true;
         }
     }
 }
