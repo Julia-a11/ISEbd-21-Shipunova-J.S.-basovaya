@@ -10,18 +10,17 @@ namespace Laboratornaya
         private Ship ship = null;
 
         private Action<Ship> eventAddWarShip;
-
         public FormWaterTransportConfig()
         {
             InitializeComponent();
-            panelBlackColor.MouseDown  +=  panelColor_MouseDown;
-            panelOrangeColor.MouseDown +=  panelColor_MouseDown;
-            panelPurpleColor.MouseDown +=  panelColor_MouseDown;
-            panelYellowColor.MouseDown +=  panelColor_MouseDown;
-            panelGreenColor.MouseDown  +=  panelColor_MouseDown;
-            panelBlueColor.MouseDown   +=  panelColor_MouseDown;
-            panelRedColor.MouseDown    +=  panelColor_MouseDown;
-            panelCoralColor.MouseDown  +=  panelColor_MouseDown;
+            panelBlackColor.MouseDown += panelColor_MouseDown;
+            panelOrangeColor.MouseDown += panelColor_MouseDown;
+            panelPurpleColor.MouseDown += panelColor_MouseDown;
+            panelYellowColor.MouseDown += panelColor_MouseDown;
+            panelGreenColor.MouseDown += panelColor_MouseDown;
+            panelBlueColor.MouseDown += panelColor_MouseDown;
+            panelRedColor.MouseDown += panelColor_MouseDown;
+            panelCoralColor.MouseDown += panelColor_MouseDown;
 
             buttonCancel.Click += (object sender, EventArgs e) => { Close(); };
         }

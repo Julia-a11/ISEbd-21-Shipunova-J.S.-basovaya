@@ -112,16 +112,36 @@
             // numericUpDownWeight
             // 
             this.numericUpDownWeight.Location = new System.Drawing.Point(83, 104);
+            this.numericUpDownWeight.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericUpDownWeight.Name = "numericUpDownWeight";
             this.numericUpDownWeight.Size = new System.Drawing.Size(66, 20);
             this.numericUpDownWeight.TabIndex = 3;
+            this.numericUpDownWeight.Value = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
             // 
             // numericUpDownMaxSpeed
             // 
             this.numericUpDownMaxSpeed.Location = new System.Drawing.Point(83, 41);
+            this.numericUpDownMaxSpeed.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
             this.numericUpDownMaxSpeed.Name = "numericUpDownMaxSpeed";
             this.numericUpDownMaxSpeed.Size = new System.Drawing.Size(66, 20);
             this.numericUpDownMaxSpeed.TabIndex = 2;
+            this.numericUpDownMaxSpeed.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
             // 
             // labelWeight
             // 
@@ -284,7 +304,7 @@
             // 
             // panelOrangeColor
             // 
-            this.panelOrangeColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.panelOrangeColor.BackColor = System.Drawing.Color.Orange;
             this.panelOrangeColor.Location = new System.Drawing.Point(75, 90);
             this.panelOrangeColor.Name = "panelOrangeColor";
             this.panelOrangeColor.Size = new System.Drawing.Size(48, 36);

@@ -13,6 +13,7 @@ namespace Laboratornaya
         {
             InitializeComponent();
             docksCollection = new DocksCollection(pictureBoxDocks.Width, pictureBoxDocks.Height);
+            // Draw();
         }
 
         // Заполнение listBox
@@ -34,6 +35,7 @@ namespace Laboratornaya
             }
         }
 
+
         //метод отрисовки дока
         private void Draw()
         {
@@ -49,6 +51,8 @@ namespace Laboratornaya
             }
             pictureBoxDocks.Image = bmp;
         }
+
+        
 
         //обработка кнопки "Забрать"
         private void buttonTakeShip_Click(object sender, EventArgs e)
@@ -119,5 +123,47 @@ namespace Laboratornaya
             formWaterTransportConfig.AddEvent(AddShip);
             formWaterTransportConfig.ShowDialog();
         }
+
+        // обработка нажатия пункта меню "Сохранить"
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (docksCollection.SaveData(saveFileDialog.FileName))
+                {
+                    MessageBox.Show("Сохранение прoшло успешно", "Результат",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (docksCollection.LoadData(openFileDialog1.FileName))
+                {
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    ReloadLevels();
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }
+
+
+
+
+

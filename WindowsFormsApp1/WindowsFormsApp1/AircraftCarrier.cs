@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Laboratornaya
 {
@@ -26,6 +27,22 @@ namespace Laboratornaya
             HasRadar = hasRadar;
         }
 
+        // конструктор для загрузки с файла
+        public AircraftCarrier(string info) : base(info)
+        {
+            string[] str = info.Split(separator);
+            if (str.Length == 7)
+            {
+                MaxSpeed = Convert.ToInt32(str[0]);
+                Weight = Convert.ToInt32(str[1]);
+                MainColor = Color.FromName(str[2]);
+                DopColor = Color.FromName(str[3]);
+                HasPlane = Convert.ToBoolean(str[4]);
+                HasRunWay = Convert.ToBoolean(str[5]);
+                HasRadar = Convert.ToBoolean(str[6]);
+            }
+        }
+
         // отрисовка авианосца
         public override void DrawWaterTransport(Graphics g)
         {
@@ -43,7 +60,7 @@ namespace Laboratornaya
                    new Point((int)(_startPosX ), (int)(_startPosY + 78)),
                 };
                 g.FillPolygon(new SolidBrush(DopColor), points);
-                g.DrawLine(new Pen(Color.White), _startPosX , _startPosY + 47, _startPosX + 150, _startPosY + 47);
+                g.DrawLine(new Pen(Color.White), _startPosX, _startPosY + 47, _startPosX + 150, _startPosY + 47);
             }
 
             // отрисовка радара
@@ -63,9 +80,15 @@ namespace Laboratornaya
         }
 
         // Смена дополнительного цвета
-        public void SetDopColor (Color color)
+        public void SetDopColor(Color color)
         {
             DopColor = color;
+        }
+
+        public override string ToString()
+        {
+            return
+           $"{base.ToString()}{separator}{DopColor.Name}{separator}{HasPlane}{separator}{HasRunWay}{separator}{HasRadar}";
         }
     }
 }

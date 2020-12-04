@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Laboratornaya
 {
@@ -11,12 +12,27 @@ namespace Laboratornaya
         // высота отрисовки корабля
         protected readonly int shipHeight = 100;
 
+        // разделитель для записи информации по объекту в файл
+        protected readonly char separator = ';';
+
         //конструктор
         public WarShip(int maxSpeed, float weight, Color mainColor)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
+        }
+
+        // конструктор для загрузки с файла
+        public WarShip (string info)
+        {
+            string[] str = info.Split(separator);
+            if (str.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(str[0]);
+                Weight = Convert.ToInt32(str[1]);
+                MainColor = Color.FromName(str[2]);
+            }
         }
 
         //конструктор с изменением размеров корабля
@@ -109,5 +125,11 @@ namespace Laboratornaya
             g.FillEllipse(new SolidBrush(Color.Green), _startPosX + 127, _startPosY + 40, 15, 15);
             g.DrawLine(new Pen(Color.Black), _startPosX + 139, _startPosY + 47, _startPosX + 149, _startPosY + 47);
         }
+
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+        }
     }
 }
+

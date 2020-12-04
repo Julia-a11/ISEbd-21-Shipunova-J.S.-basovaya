@@ -24,6 +24,8 @@ namespace Laboratornaya
         // Размер парковочного места (высота)
         private readonly int _placeSizeHeight = 130;
 
+
+
         public Docks(int picWidth, int picHeight)
         {
             int width = picWidth / _placeSizeWidth;
@@ -84,6 +86,16 @@ namespace Laboratornaya
                 g.DrawLine(pen, i * _placeSizeWidth, 0, i * _placeSizeWidth,
                     (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
             }
+        }
+
+        // функция получения элемента из списка
+        public T GetNext(int ind)
+        {
+            if (ind < 0 || ind >= _places.Count)
+            {
+                return null;
+            }
+            return _places[ind];
         }
     }
 }
