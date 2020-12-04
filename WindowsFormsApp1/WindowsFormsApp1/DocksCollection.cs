@@ -22,7 +22,7 @@ namespace Laboratornaya
         // разделитель для записи информации в файл
         private readonly char separator = ':';
 
-        // Кнструктор
+        // Конструктор
         public DocksCollection(int pictureWidth, int pictureHeight)
         {
             docksStages = new Dictionary<string, Docks<Ship>>();
