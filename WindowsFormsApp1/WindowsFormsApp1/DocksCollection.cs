@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace Laboratornaya
         // разделитель для записи информации в файл
         private readonly char separator = ':';
 
-        // Конструктор
+        // Кнструктор
         public DocksCollection(int pictureWidth, int pictureHeight)
         {
             docksStages = new Dictionary<string, Docks<Ship>>();
@@ -63,7 +64,7 @@ namespace Laboratornaya
         }
 
         // сохранение информации по кораблям в доках в файл
-        public bool SaveData(string filename)
+        public void SaveData(string filename)
         {
             if (File.Exists(filename))
             {
@@ -97,15 +98,14 @@ namespace Laboratornaya
                     }
                 }
             }
-            return true;
         }
 
         // загрузка информации по кораблям в доках из файла
-        public bool LoadData(string filename)
+        public void LoadData(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
             using (StreamReader sr = new StreamReader(filename, Encoding.Default))
             {
@@ -116,7 +116,8 @@ namespace Laboratornaya
                 }
                 else
                 {
-                    return false;
+                    throw new FileLoadException();
+
                 }
                 string key = string.Empty;
                 WarShip warShip = null;
@@ -140,12 +141,11 @@ namespace Laboratornaya
                         }
                         if (!(docksStages[key] + warShip))
                         {
-                            return false;
+                            throw new DocksOverflowException();
                         }
                     }
                 }
             }          
-            return true;
         }
     }
 }

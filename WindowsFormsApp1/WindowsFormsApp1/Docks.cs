@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using Laboratornya;
 
 namespace Laboratornaya
 {
@@ -24,6 +25,8 @@ namespace Laboratornaya
         // Размер парковочного места (высота)
         private readonly int _placeSizeHeight = 130;
 
+
+
         public Docks(int picWidth, int picHeight)
         {
             int width = picWidth / _placeSizeWidth;
@@ -39,7 +42,7 @@ namespace Laboratornaya
         {
             if (d._places.Count >= d._maxDocksPlaces)
             {
-                return false;
+                throw new DocksOverflowException();
             }
             d._places.Add(ship);
             return true;
@@ -48,9 +51,9 @@ namespace Laboratornaya
         // Перегрузка оператора вычитания
         public static T operator -(Docks<T> d, int index)
         {
-            if (index < -1 || index > d._places.Count)
+            if (index < 0 || index >= d._places.Count)
             {
-                return null;
+                throw new DocksNotFoundException(index);
             }
             T ship = d._places[index];
             d._places.RemoveAt(index);
