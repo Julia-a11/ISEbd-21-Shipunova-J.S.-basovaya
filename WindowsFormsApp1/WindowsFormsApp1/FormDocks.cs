@@ -6,7 +6,7 @@ namespace Laboratornaya
 {
     public partial class FormDocks : Form
     {
-        //объект от класса - коллекции доков
+        // объект от класса - коллекции доков
         private readonly DocksCollection docksCollection;
 
         public FormDocks()
@@ -34,7 +34,7 @@ namespace Laboratornaya
             }
         }
 
-        //метод отрисовки дока
+        // метод отрисовки дока
         private void Draw()
         {
             Bitmap bmp = new Bitmap(pictureBoxDocks.Width, pictureBoxDocks.Height);
@@ -50,7 +50,7 @@ namespace Laboratornaya
             pictureBoxDocks.Image = bmp;
         }
 
-        //обработка кнопки "Забрать"
+        // обработка кнопки "Забрать"
         private void buttonTakeShip_Click(object sender, EventArgs e)
         {
             if (maskedTextBoxNumber.Text != "" && listBoxDocks.SelectedIndex > -1)
@@ -118,6 +118,43 @@ namespace Laboratornaya
             FormWaterTransportConfig formWaterTransportConfig = new FormWaterTransportConfig();
             formWaterTransportConfig.AddEvent(AddShip);
             formWaterTransportConfig.ShowDialog();
+        }
+
+        // обработка нажатия пункта меню "Сохранить"
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (docksCollection.SaveData(saveFileDialog.FileName))
+                {
+                    MessageBox.Show("Сохранение прoшло успешно", "Результат",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (docksCollection.LoadData(openFileDialog.FileName))
+                {
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    ReloadLevels();
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

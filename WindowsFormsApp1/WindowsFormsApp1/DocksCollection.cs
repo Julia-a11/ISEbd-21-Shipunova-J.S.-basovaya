@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace Laboratornaya
 {
@@ -16,6 +18,9 @@ namespace Laboratornaya
 
         // Высота окна отрисоки
         private readonly int pictureHeight;
+
+        // разделитель для записи информации в файл
+        private readonly char separator = ':';
 
         // Конструктор
         public DocksCollection(int pictureWidth, int pictureHeight)
@@ -55,6 +60,92 @@ namespace Laboratornaya
                 }
                 return null;
             }
+        }
+
+        // сохранение информации по кораблям в доках в файл
+        public bool SaveData(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
+            using (StreamWriter sw = new StreamWriter(filename, false, Encoding.Default))
+            {
+                sw.WriteLine($"DocksCollection");
+                foreach (var level in docksStages)
+                {
+                    // начинаем парковку
+                    sw.WriteLine($"Docks{separator}{level.Key}");
+                    IWaterTransport ship = null;
+                    for (int i = 0; (ship = level.Value.GetNext(i)) != null; i++)
+                    {
+                        if (ship != null)
+                        {
+                            // если место не пустое
+                            // записываем тип корабля
+                            if (ship.GetType().Name == "WarShip")
+                            {
+                                sw.Write($"WarShip {separator}");
+                            }
+                            if (ship.GetType().Name == "AircraftCarrier")
+                            {
+                                sw.Write($"AircraftCarrier{separator}");
+                            }
+                            // записываем параметры
+                            sw.WriteLine(ship);
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        // загрузка информации по кораблям в доках из файла
+        public bool LoadData(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                return false;
+            }
+            using (StreamReader sr = new StreamReader(filename, Encoding.Default))
+            {
+                string line = sr.ReadLine();
+                if (line.Contains("DocksCollection"))
+                {
+                    docksStages.Clear();
+                }
+                else
+                {
+                    return false;
+                }
+                string key = string.Empty;
+                WarShip warShip = null;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (line.Contains("Dock"))
+                    {
+                        key = line.Split(separator)[1];
+                        docksStages.Add(key, new Docks<Ship>(pictureWidth, pictureHeight));
+                    }
+                    else if (line.Contains(separator))
+                    {
+                       
+                        if (line.Contains("WarShip"))
+                        {
+                            warShip = new WarShip(line.Split(separator)[1]);
+                        }
+                        else if (line.Contains("AircraftCarrier"))
+                        {
+                            warShip = new AircraftCarrier(line.Split(separator)[1]);
+                        }
+                        if (!(docksStages[key] + warShip))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }          
+            return true;
         }
     }
 }

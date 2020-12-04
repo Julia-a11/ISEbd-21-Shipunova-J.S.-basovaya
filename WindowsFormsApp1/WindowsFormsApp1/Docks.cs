@@ -85,5 +85,15 @@ namespace Laboratornaya
                     (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
             }
         }
+
+        // функция получения элемента из списка
+        public T GetNext(int ind)
+        {
+            if (ind < 0 || ind >= _places.Count)
+            {
+                return null;
+            }
+            return _places[ind];
+        }
     }
 }

@@ -28,23 +28,6 @@ namespace Laboratornaya
             pictureBoxWaterTransport.Image = bmp;
         }
 
-        // Обработка нажатия кнопки "Создать"
-        private void buttonCreateAirctaft_Click(object sender, EventArgs e)
-        {
-            Random rnd = new Random();
-            ship = new AircraftCarrier(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.DarkGray, Color.DimGray, true, true, true);
-            ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxWaterTransport.Width, pictureBoxWaterTransport.Height);
-            Draw();
-        }
-
-        private void buttonCreateWarShip_Click(object sender, EventArgs e)
-        {
-            Random rnd = new Random();
-            ship = new WarShip(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.DarkGray);
-            ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxWaterTransport.Width, pictureBoxWaterTransport.Height);
-            Draw();
-        }
-
         // Обработка нажатия кнопок управления
         private void buttonMove_Click(object sender, EventArgs e)
         {
