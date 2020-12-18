@@ -140,13 +140,13 @@ namespace Laboratornaya
             {
                 return false;
             }
-            if (!(obj is AircraftCarrier warShipObj))
+            if (!(obj is AircraftCarrier aircraftCarrierObj))
             {
                 return false;
             }
             else
             {
-                return Equals(warShipObj);
+                return Equals(aircraftCarrierObj);
             }
         }
     }

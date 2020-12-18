@@ -124,7 +124,7 @@ namespace Laboratornaya
         }
 
         // Метод добавления корабля
-        private void AddShip(WarShip ship)
+        private void AddShip(Ship ship)
         {
             if (ship != null && listBoxDocks.SelectedIndex > -1)
             {

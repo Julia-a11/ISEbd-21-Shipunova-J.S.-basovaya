@@ -7,9 +7,9 @@ namespace Laboratornaya
     public partial class FormWaterTransportConfig : Form
     {
         // Переменная-выбранное военное судно
-        private WarShip ship = null;
+        private Ship ship = null;
 
-        private Action<WarShip> eventAddWarShip;
+        private Action<Ship> eventAddWarShip;
         public FormWaterTransportConfig()
         {
             InitializeComponent();
@@ -38,11 +38,11 @@ namespace Laboratornaya
         }
 
         //Добавляем событие 
-        public void AddEvent(Action<WarShip> ev)
+        public void AddEvent(Action<Ship> ev)
         {
             if (eventAddWarShip == null)
             {
-                eventAddWarShip = new Action<WarShip>(ev);
+                eventAddWarShip = new Action<Ship>(ev);
             }
             else
             {
