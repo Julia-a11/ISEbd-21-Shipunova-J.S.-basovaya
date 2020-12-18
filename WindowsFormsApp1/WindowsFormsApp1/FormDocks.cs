@@ -124,7 +124,7 @@ namespace Laboratornaya
         }
 
         // Метод добавления корабля
-        private void AddShip(Ship ship)
+        private void AddShip(WarShip ship)
         {
             if (ship != null && listBoxDocks.SelectedIndex > -1)
             {
@@ -144,6 +144,12 @@ namespace Laboratornaya
                 catch(DocksOverflowException ex)
                 {
                     MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
+                }
+                catch(DocksAlreadyHaveException ex)
+                {
+                    MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                     logger.Warn(ex.Message);
                 }
@@ -208,6 +214,12 @@ namespace Laboratornaya
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     logger.Warn(ex.Message);
                 }
+                catch (DocksAlreadyHaveException ex)
+                {
+                    MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    logger.Warn(ex.Message);
+                }
                 catch (FileNotFoundException ex)
                 {
                     MessageBox.Show(ex.Message, "Файл не найден", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -223,6 +235,16 @@ namespace Laboratornaya
                     MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     logger.Warn(ex.Message);
                 }
+            }
+        }
+
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            if (listBoxDocks.SelectedIndex > -1)
+            {
+                docksCollection[listBoxDocks.SelectedItem.ToString()].Sort();
+                Draw();
+                logger.Info("Сортировка уровней");
             }
         }
     }

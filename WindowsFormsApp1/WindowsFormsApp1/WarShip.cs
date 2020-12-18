@@ -4,7 +4,7 @@ using System.Drawing;
 namespace Laboratornaya
 {
     //базовый класс
-    public class WarShip : Ship
+    public class WarShip : Ship, IEquatable<WarShip>
     {
         // ширина отрисовки корабля
         protected readonly int shipWidth = 150;
@@ -24,7 +24,7 @@ namespace Laboratornaya
         }
 
         // конструктор для загрузки с файла
-        public WarShip (string info)
+        public WarShip(string info)
         {
             string[] str = info.Split(separator);
             if (str.Length == 3)
@@ -129,6 +129,49 @@ namespace Laboratornaya
         public override string ToString()
         {
             return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+        }
+
+        // метод интерфейса IEquatable для класса WarShip
+        public bool Equals(WarShip other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        // перегрузка метода от object
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is WarShip warShipObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(warShipObj);
+            }
         }
     }
 }

@@ -76,8 +76,7 @@ namespace Laboratornaya
                 {
                     // начинаем парковку
                     sw.WriteLine($"Docks{separator}{level.Key}");
-                    IWaterTransport ship = null;
-                    for (int i = 0; (ship = level.Value.GetNext(i)) != null; i++)
+                    foreach (IWaterTransport ship in level.Value)
                     {
                         if (ship != null)
                         {
