@@ -46,6 +46,7 @@
             this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.buttonSort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDocks)).BeginInit();
             this.groupBoxTakeShip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -61,7 +62,7 @@
             // 
             // buttonAddWarShip
             // 
-            this.buttonAddWarShip.Location = new System.Drawing.Point(762, 238);
+            this.buttonAddWarShip.Location = new System.Drawing.Point(758, 304);
             this.buttonAddWarShip.Name = "buttonAddWarShip";
             this.buttonAddWarShip.Size = new System.Drawing.Size(113, 51);
             this.buttonAddWarShip.TabIndex = 1;
@@ -109,7 +110,7 @@
             this.groupBoxTakeShip.Controls.Add(this.maskedTextBoxNumber);
             this.groupBoxTakeShip.Controls.Add(this.labelPlace);
             this.groupBoxTakeShip.Controls.Add(this.buttonTakeShip);
-            this.groupBoxTakeShip.Location = new System.Drawing.Point(762, 311);
+            this.groupBoxTakeShip.Location = new System.Drawing.Point(761, 361);
             this.groupBoxTakeShip.Name = "groupBoxTakeShip";
             this.groupBoxTakeShip.Size = new System.Drawing.Size(115, 124);
             this.groupBoxTakeShip.TabIndex = 8;
@@ -203,11 +204,22 @@
             // 
             this.saveFileDialog.Filter = "txt file | *.txt";
             // 
+            // buttonSort
+            // 
+            this.buttonSort.Location = new System.Drawing.Point(761, 235);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(113, 51);
+            this.buttonSort.TabIndex = 15;
+            this.buttonSort.Text = "Сортировать";
+            this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
+            // 
             // FormDocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(880, 488);
+            this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.buttonDocksRemove);
             this.Controls.Add(this.listBoxDocks);
             this.Controls.Add(this.buttonAddDocks);
@@ -251,6 +263,7 @@
         private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button buttonSort;
     }
 }
 

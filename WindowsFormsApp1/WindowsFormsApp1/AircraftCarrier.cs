@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Laboratornaya
 {
-    class AircraftCarrier : WarShip
+    class AircraftCarrier : WarShip, IEquatable<AircraftCarrier>
     {
         // дополнительные цвета
         public Color DopColor { private set; get; }
@@ -89,6 +89,65 @@ namespace Laboratornaya
         {
             return
            $"{base.ToString()}{separator}{DopColor.Name}{separator}{HasPlane}{separator}{HasRunWay}{separator}{HasRadar}";
+        }
+
+        // метод интерфейса IEquatable для класса AircraftCarrier
+        public bool Equals(AircraftCarrier other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (HasPlane != other.HasPlane)
+            {
+                return false;
+            }
+            if (HasRadar != other.HasRadar)
+            {
+                return false;
+            }
+            if (HasRunWay != other.HasRunWay)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        // Перегрузка метода от object
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is AircraftCarrier aircraftCarrierObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(aircraftCarrierObj);
+            }
         }
     }
 }
